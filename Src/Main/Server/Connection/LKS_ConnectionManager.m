@@ -39,12 +39,11 @@ NSString *const LKS_ConnectionDidEndNotificationName = @"LKS_ConnectionDidEndNot
 }
 
 + (void)load {
-    if (NSProcessInfo.processInfo.environment[@"XCODE_RUNNING_FOR_PREVIEWS"]) {
-
-    } else {
-        // 触发 init 方法
-        [LKS_ConnectionManager sharedInstance];
+    if ([NSFileManager.defaultManager.temporaryDirectory.pathComponents containsObject:@"Previews"]) {
+        return;
     }
+    // 触发 init 方法
+    [LKS_ConnectionManager sharedInstance];
 }
 
 - (instancetype)init {
