@@ -26,6 +26,9 @@
 #else
 
 + (void)load {
+    if ([NSFileManager.defaultManager.temporaryDirectory.pathComponents containsObject:@"Previews"]) {
+        return;
+    }
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Method oriMethod = class_getClassMethod([self class], @selector(effectWithStyle:));
